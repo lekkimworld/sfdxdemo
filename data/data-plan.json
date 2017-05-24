@@ -1,0 +1,16 @@
+[
+  {
+    "sobject": "Foo__c",
+    "saveRefs": true,
+    "files": [
+      "foos-Foo__c.json"
+    ]
+  },
+  {
+    "sobject": "Contact",
+    "resolveRefs": true,
+    "files": [
+      "contact-Contact.json"
+    ]
+  }
+]

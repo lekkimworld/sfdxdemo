@@ -1,0 +1,11 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Foo__c",
+                "referenceId": "Foo__cRef1"
+            },
+            "Name": "Foo 1"
+        }
+    ]
+}

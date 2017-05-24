@@ -1,0 +1,11 @@
+{
+  "Company": "mheisterberg Company",
+  "Country": "US",
+  "FirstName": "Mikkel", 
+  "LastName": "Heisterberg",
+  "Email": "mheisterberg@example.com",
+  "Edition": "Developer",
+  "OrgPreferences" : {
+    "S1DesktopEnabled" : true
+  }
+}

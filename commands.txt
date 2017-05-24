@@ -1,0 +1,37 @@
+sfdx force:workspace:create --workspacename bwdemo
+sfdx force:config:set defaultdevhubusername=dxpilot+mheisterberg@salesforce.com
+sfdx force:org:create -f config/workspace-scratch-def.json -a bwdemo
+sfdx force:org:open -u bwdemo
+- create custom Foo object
+- create lookup relationship on Contact object
+- create new Contact linking to a new Foo object
+
+sfdx force:org:list
+- grab username
+
+sfdx force:config:set defaultusername=scratchorg1495619886797@mheisterbergcompany.com
+sfdx force:source:pull
+
+sfdx force:org:delete -u bwdemo
+sfdx force:org:list
+sfdx force:org:create -f config/workspace-scratch-def.json -a bwdemo2
+sfdx force:config:set defaultusername=scratchorg1495620625456@mheisterbergcompany.com
+sfdx force:source:push -u bwdemo2
+sfdx force:org:open -u bwdemo2
+- objects are there but lookup relationship is not on contact object as field security is not set in the profile
+- recreate Foo object and Contact linking to it
+
+mkdir data
+sfdx force:data:tree:export -q "SELECT Name FROM Foo__c" --prefix foos --outputdir ./data
+sfdx force:data:tree:export -q "SELECT FirstName,LastName,Foo__c FROM Contact WHERE Foo__c != ''" --prefix contact --outputdir ./data
+- massage...
+
+
+
+sfdx force:org:create -f config/workspace-scratch-def.json -a bwdemo3
+sfdx force:config:set defaultusername=scratchorg1495629274727@mheisterbergcompany.com
+sfdx force:source:push -u bwdemo3
+sfdx force:user:permset:assign -n DevAccess -u bwdemo3
+sfdx force:data:tree:import --plan data/data-plan.json
+sfdx force:org:open -u bwdemo3
+
